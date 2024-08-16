@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
+import './LoginPage.css'; // Import the CSS file
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -11,7 +12,7 @@ const RegisterPage = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', {
+      const res = await axios.post('/api/auth/register', {
         username,
         email,
         password
@@ -24,10 +25,10 @@ const RegisterPage = () => {
   };
   
   return (
-    <div>
+    <div className="auth-container">
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
-        <div>
+        <div className="form-group">
           <label>Username</label>
           <input 
             type="text" 
@@ -36,7 +37,7 @@ const RegisterPage = () => {
             required 
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Email</label>
           <input 
             type="email" 
@@ -45,7 +46,7 @@ const RegisterPage = () => {
             required 
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Password</label>
           <input 
             type="password" 
@@ -56,6 +57,7 @@ const RegisterPage = () => {
         </div>
         <button type="submit">Register</button>
       </form>
+      <a href="/login">Already have an account? Login</a>
     </div>
   );
 };
