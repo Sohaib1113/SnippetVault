@@ -129,7 +129,13 @@ body {
     top: 100px; /* Start the card exactly below the navbar */
 }
 
-
+.error-message {
+    color: red;           /* Red color for the text */
+    font-weight: bold;    /* Bold text */
+    font-size: 14px;      /* Font size */
+    margin-top: 5px;      /* Space above the message */
+  }
+  
 /* Main Content Heading */
 .universal-card h2 {
     margin-bottom: 20px;

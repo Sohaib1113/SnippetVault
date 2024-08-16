@@ -8,6 +8,7 @@ const EditSnippet = () => {
   const [description, setDescription] = useState('');
   const [code, setCode] = useState('');
   const [tags, setTags] = useState('');
+  const [errors, setErrors] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -33,8 +34,21 @@ const EditSnippet = () => {
     fetchSnippet();
   }, [id, navigate]);
 
+  const validateForm = () => {
+    const formErrors = {};
+    if (!title) formErrors.title = "Title is required.";
+    if (!code) formErrors.code = "Code is required.";
+    return formErrors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       await axios.put(`/api/snippets/${id}`, { title, description, code, tags }, {
@@ -75,6 +89,7 @@ const EditSnippet = () => {
                 onChange={(e) => setTitle(e.target.value)} 
                 required 
               />
+              {errors.title && <p className="form-error">{errors.title}</p>}
               <textarea 
                 placeholder="Description" 
                 value={description} 
@@ -86,6 +101,7 @@ const EditSnippet = () => {
                 onChange={(e) => setCode(e.target.value)} 
                 required 
               />
+              {errors.code && <p className="form-error">{errors.code}</p>}
               <input 
                 type="text" 
                 placeholder="Tags (comma separated)" 
