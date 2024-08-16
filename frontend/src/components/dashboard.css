@@ -108,65 +108,59 @@ body {
 /* Main Content Area */
 .main-content {
     margin-left: 310px; /* Adjusted for floating sidebar */
-    padding: 100px 20px 20px; /* Adjusted padding to leave space for the floating navbar */
+     /* Adjusted padding to leave space for the floating navbar */
     background-color: #ecf0f1;
     height: 100%;
     overflow-y: auto;
 }
+/* Universal Card Styling */
+.universal-card {
+    width: calc(100% - 280px); /* Adjust the width to match the remaining space next to the sidebar */
+    max-width: 100%;
+    min-height: calc(100vh - 140px); /* Adjust height to account for navbar and top margin */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-left: -505px; /* Align next to the sidebar */
+    margin-top: 0px; /* Align below the navbar */
+    overflow-y: auto; /* Allow scrolling within the card */
+    position: fixed; /* Make it fixed to keep it in place */
+    top: 100px; /* Start the card exactly below the navbar */
+}
+
 
 /* Main Content Heading */
-.main-content h2 {
+.universal-card h2 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #2c3e50;
 }
 
-/* Card Styling */
-.card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+/* Form inside Card */
+.universal-card form {
+    display: flex;
+    flex-direction: column;
 }
 
-.card h3 {
-    margin-bottom: 15px;
-    font-size: 20px;
-    color: #34495e;
-}
-
-.card p {
-    margin-bottom: 10px;
-    color: #7f8c8d;
-}
-
-/* Snippets Container */
-.snippets-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-/* Snippet Card */
-.snippet-card {
-    background-color: #fff;
+.universal-card input, .universal-card textarea {
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.snippet-card h3 {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #2980b9;
-}
-
-.snippet-card code {
-    display: block;
-    background-color: #ecf0f1;
-    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    margin-top: 10px;
-    color: #e74c3c;
+    font-size: 16px;
+}
+
+.universal-card button {
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.universal-card button:hover {
+    background-color: #2980b9;
 }

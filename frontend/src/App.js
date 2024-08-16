@@ -4,6 +4,8 @@ import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import Dashboard from './components/Dashboard';
+import CreateSnippet from './components/CreateSnippet';
+import EditSnippet from './components/EditSnippet';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/create-snippet" element={<CreateSnippet />} />
+          <Route path="/edit-snippet/:id" element={<EditSnippet />} />
         </Routes>
       </div>
     </Router>

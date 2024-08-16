@@ -102,5 +102,44 @@ router.delete('/:id', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
-
+// Get all snippets for the logged-in user
+router.get('/', auth, async (req, res) => {
+    try {
+      const snippets = await Snippet.findAll({
+        where: {
+          userId: req.user.id, // Filter snippets by the authenticated user's ID
+        },
+        order: [['createdAt', 'DESC']], // Optional: Order snippets by creation date
+      });
+  
+      res.json(snippets);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
+  
+// @route   POST /api/snippets
+// @desc    Create a new snippet
+// @access  Private
+router.post('/', auth, async (req, res) => {
+    const { title, description, code, tags } = req.body;
+  
+    try {
+      const newSnippet = new Snippet({
+        title,
+        description,
+        code,
+        tags,
+        userId: req.user.id,  // Associate snippet with the logged-in user
+      });
+  
+      const snippet = await newSnippet.save();
+      res.json(snippet);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
+  
 module.exports = router;
