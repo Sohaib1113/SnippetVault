@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors'); // Import CORS
 const sequelize = require('./db');
 const auth = require('./middleware/auth');
 const app = express();
-
+// Enable CORS for all routes
+app.use(cors());
 app.use(express.json());
 
 // Route imports

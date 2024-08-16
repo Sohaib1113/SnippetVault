@@ -84,4 +84,23 @@ router.put('/:id', auth, async (req, res) => {
   }
 });
 
-// @route  
+// @route   DELETE /api/snippets/:id
+// @desc    Delete a snippet by ID
+// @access  Private
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const snippet = await Snippet.findByPk(req.params.id);
+
+    if (!snippet || snippet.userId !== req.user.id) {
+      return res.status(404).json({ msg: 'Snippet not found' });
+    }
+
+    await snippet.destroy();
+    res.json({ msg: 'Snippet removed' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+module.exports = router;

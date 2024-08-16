@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('./db');
+const sequelize = require('../db');
+const User = require('./User');
 
 const Snippet = sequelize.define('Snippet', {
   title: {
@@ -15,7 +16,18 @@ const Snippet = sequelize.define('Snippet', {
   },
   tags: {
     type: DataTypes.STRING,
-  }
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: User, // Reference to the 'Users' table
+      key: 'id',
+    },
+  },
 });
+
+// Ensure the foreign key relationship is established
+Snippet.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 
 module.exports = Snippet;
