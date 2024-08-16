@@ -135,6 +135,26 @@ body {
     font-size: 14px;      /* Font size */
     margin-top: 5px;      /* Space above the message */
   }
+  /* tag seleted */
+  .tag {
+    display: inline-block;
+    background-color: #3498db;
+    color: #fff;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.tag.selected {
+    background-color: #2c3e50; /* Change color to indicate selection */
+}
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
   
 /* Main Content Heading */
 .universal-card h2 {

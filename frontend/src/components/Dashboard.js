@@ -2,15 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
 import './dashboard.css'; // Assuming this contains your original styles
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
   const [snippets, setSnippets] = useState([]);
   const [selectedTag, setSelectedTag] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const snippetsPerPage = 5;
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const token = localStorage.getItem('token');
       if (!token) {
         navigate('/login');
@@ -21,10 +28,14 @@ const Dashboard = () => {
               'x-auth-token': token,
             },
           });
-          setSnippets(res.data);
+          setTimeout(() => {
+            setSnippets(res.data);
+            setLoading(false);
+          }, 1000); // 3-second delay
         } catch (err) {
           console.error(err);
-          navigate('/login');
+          setError('Failed to load snippets. Please try again later.');
+          setLoading(false);
         }
       }
     };
@@ -38,22 +49,27 @@ const Dashboard = () => {
   };
 
   const handleTagClick = (tag) => {
-    setSelectedTag(tag);
+    setSelectedTag(selectedTag === tag ? null : tag);
   };
 
   const handleDelete = async (id) => {
-    try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`/api/snippets/${id}`, {
-        headers: {
-          'x-auth-token': token,
-        },
-      });
-  
-      // After deletion, update the state to remove the deleted snippet
-      setSnippets(snippets.filter(snippet => snippet.id !== id));
-    } catch (err) {
-      console.error('Failed to delete snippet:', err);
+    if (window.confirm("Are you sure you want to delete this snippet?")) {
+      setLoading(true);
+      try {
+        const token = localStorage.getItem('token');
+        await axios.delete(`/api/snippets/${id}`, {
+          headers: {
+            'x-auth-token': token,
+          },
+        });
+        setTimeout(() => {
+          setSnippets(snippets.filter(snippet => snippet.id !== id));
+          setLoading(false);
+        }, 1000); // 3-second delay
+      } catch (err) {
+        setError('Failed to delete the snippet. Please try again.');
+        setLoading(false);
+      }
     }
   };
 
@@ -61,6 +77,8 @@ const Dashboard = () => {
     setSearchQuery(e.target.value.toLowerCase());
   };
 
+  const indexOfLastSnippet = currentPage * snippetsPerPage;
+  const indexOfFirstSnippet = indexOfLastSnippet - snippetsPerPage;
   const filteredSnippets = snippets.filter(snippet => {
     const matchesTag = selectedTag ? snippet.tags.includes(selectedTag) : true;
     const matchesSearch = snippet.title.toLowerCase().includes(searchQuery) || 
@@ -68,6 +86,10 @@ const Dashboard = () => {
                           snippet.tags.toLowerCase().includes(searchQuery);
     return matchesTag && matchesSearch;
   });
+  const currentSnippets = filteredSnippets.slice(indexOfFirstSnippet, indexOfLastSnippet);
+  const totalPages = Math.ceil(filteredSnippets.length / snippetsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="g-sidenav-show bg-gray-100">
@@ -94,27 +116,64 @@ const Dashboard = () => {
         <div className="container-fluid py-4">
           <div className="universal-card">
             <h2>Dashboard</h2>
+            {loading && (
+              <div className="loading-spinner">
+                <FontAwesomeIcon icon={faSpinner} spin /> Loading...
+              </div>
+            )}
+            {error && <div className="error-message">{error}</div>}
             <div className="snippets-container">
-              {filteredSnippets.length > 0 ? (
-                filteredSnippets.map((snippet) => (
+              {currentSnippets.length > 0 ? (
+                currentSnippets.map((snippet) => (
                   <div key={snippet.id} className="snippet-card">
                     <h3>{snippet.title}</h3>
                     <p>{snippet.description}</p>
                     <code>{snippet.code}</code>
                     <div className="snippet-tags">
                       {snippet.tags && snippet.tags.split(',').map((tag, index) => (
-                        <span key={index} className="tag" onClick={() => handleTagClick(tag)}>{tag.trim()}</span>
+                        <span 
+                          key={index} 
+                          className={`tag ${selectedTag === tag.trim() ? 'selected' : ''}`} 
+                          onClick={() => handleTagClick(tag.trim())}
+                        >
+                          {tag.trim()}
+                        </span>
                       ))}
                     </div>
                     <div className="snippet-actions">
-                      <button className="edit-btn" onClick={() => navigate(`/edit-snippet/${snippet.id}`)}>Edit</button>
-                      <button className="delete-btn" onClick={() => handleDelete(snippet.id)}>Delete</button>
+                      <button 
+                        className="edit-btn" 
+                        onClick={() => {
+                          if (window.confirm("Are you sure you want to edit this snippet?")) {
+                            navigate(`/edit-snippet/${snippet.id}`);
+                          }
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        className="delete-btn" 
+                        onClick={() => handleDelete(snippet.id)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
                 ))
               ) : (
-                <p>No snippets available. <a href="/create-snippet">Create one now!</a></p>
+                !loading && <p>No snippets available. <a href="/create-snippet">Create one now!</a></p>
               )}
+            </div>
+            <div className="pagination">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button 
+                  key={index + 1} 
+                  onClick={() => paginate(index + 1)}
+                  className={currentPage === index + 1 ? 'active' : ''}
+                >
+                  {index + 1}
+                </button>
+              ))}
             </div>
           </div>
         </div>
