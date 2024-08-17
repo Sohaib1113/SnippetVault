@@ -20,7 +20,25 @@ const Snippet = sequelize.define('Snippet', {
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  }
+  },
+  shareableLink: {
+    type: DataTypes.STRING,
+    unique: true,
+  },
+  sharedWithEmail: {
+    type: DataTypes.STRING,
+    allowNull: true, // This is optional
+  },
+  isPublic: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+  forkedFromSnippetId: {
+    type: DataTypes.INTEGER,
+    allowNull: true, // This will track the original snippet if it's a fork
+  },
+}, {
+  timestamps: true, // Automatically includes createdAt and updatedAt fields
 });
 
 // Define the association with the User model

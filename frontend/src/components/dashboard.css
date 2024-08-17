@@ -5,10 +5,10 @@ body, h1, h2, h3, h4, h5, h6, p, div {
     box-sizing: border-box;
 }
 
-/* Body Styling */
+
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
     color: #333;
     height: 100vh;
     display: flex;
@@ -18,7 +18,10 @@ body {
 .sidebar {
     width: 250px;
     height: calc(100vh - 40px); /* Adjusted for floating effect */
-    background-color: #2c3e50;
+    background: #642B73;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #C6426E, #642B73);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #C6426E, #642B73); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -69,14 +72,17 @@ body {
 .navbar {
     width: calc(100% - 290px); /* Adjusted for floating sidebar */
     height: 60px;
-    background-color: #34495e;
+    background: #642B73;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #C6426E, #642B73);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #C6426E, #642B73); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
     position: fixed;
     top: 20px; /* Same as the sidebar */
-    left: 290px; /* Adjusted for floating sidebar */
+    left: 276px; /* Adjusted for floating sidebar */
     border-radius: 10px; /* Rounded corners for a floating effect */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for a floating effect */
     z-index: 999; /* Ensure it stays on top */
@@ -126,7 +132,10 @@ body {
     margin-top: 0px; /* Align below the navbar */
     overflow-y: auto; /* Allow scrolling within the card */
     position: fixed; /* Make it fixed to keep it in place */
-    top: 100px; /* Start the card exactly below the navbar */
+    top: 90px; /* Start the card exactly below the navbar */
+    bottom: 20px;
+    right: 5px;
+    
 }
 
 .error-message {
@@ -138,7 +147,10 @@ body {
   /* tag seleted */
   .tag {
     display: inline-block;
-    background-color: #3498db;
+    background: #642B73;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #C6426E, #642B73);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #C6426E, #642B73); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     color: #fff;
     padding: 5px 10px;
     margin: 5px;
@@ -189,4 +201,206 @@ body {
 
 .universal-card button:hover {
     background-color: #2980b9;
+}
+/* snippetcards */
+.snippets-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+    gap: 20px;
+  }
+  
+  .snippet-card {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(198, 66, 110, 0.5), 0 4px 12px rgba(100, 43, 115, 0.5);
+    color: #333; /* Adjust text color based on background */
+}
+
+  
+  .snippet-tags {
+    margin-top: 10px;
+  }
+  
+  .snippet-tags .tag {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .snippet-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two buttons per row */
+    gap: 10px; /* Space between buttons */
+    margin-top: 15px; /* Add some space above the buttons */
+}
+
+.snippet-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Space between icon and text */
+    background: #56CCF2;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    color: white;
+    border: 1px solid #2980b9;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.snippet-actions button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+   /* tabs */
+  /* Tabs Styling */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background-color: #3498db;
+    color: white;
+    border: 1px solid #2980b9; /* Adding a border around each tab */
+    padding: 10px 20px;
+    margin-right: 10px; /* Adding space between tabs */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.tab-button:last-child {
+    margin-right: 0; /* No margin for the last tab */
+}
+
+.tab-button.active {
+    background-color: #2980b9;
+    border-color: #1c598a; /* Darker border color for the active tab */
+}
+
+.tab-button:hover {
+    background-color: #2980b9;
+}
+/* pagination */
+/* Pagination Styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Space above the pagination */
+}
+
+.pagination button {
+    background-color: #3498db;
+    color: white;
+    border: 1px solid #2980b9; /* Adding a border around each pagination button */
+    padding: 8px 16px;
+    margin-right: 8px; /* Adding space between pagination buttons */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.pagination button:last-child {
+    margin-right: 0; /* No margin for the last button */
+}
+
+.pagination button.active {
+    background-color: #2980b9;
+    border-color: #1c598a; /* Darker border color for the active pagination button */
+}
+
+.pagination button:hover {
+    background-color: #2980b9;
+}
+/* sidebar footer copyright */
+/* Footer Section in Sidebar */
+/* Footer Section in Sidebar */
+.sidebar .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #34495e;
+    color: #fff; /* White text */
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0; /* Start with an invisible state for animation */
+    transform: translateY(10px); /* Start slightly below the final position */
+    animation: floatIn 1.5s ease-out forwards; /* Apply the animation with more duration for smoother effect */
+}
+
+.sidebar .footer p {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    color: #fff; /* Ensures all text is white */
+}
+
+.sidebar .footer i {
+    margin-right: 10px;
+    color: #fff; /* Icon color set to white */
+    font-size: 18px; /* Slightly larger icons */
+}
+
+.sidebar .footer a {
+    color: #fff; /* Ensure link text is white */
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.sidebar .footer a:hover {
+    color: #e0e0e0; /* Slightly lighter white on hover */
+    text-decoration: underline;
+}
+
+/* Floating Animation */
+@keyframes floatIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Continuous Floating Animation for Footer */
+@keyframes floating {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.sidebar .footer {
+    animation: floatIn 1.5s ease-out forwards, floating 3s ease-in-out infinite; /* Added continuous floating animation */
+}
+
+/* Optional: Hover Animation for Footer Links */
+.sidebar .footer a {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.2s ease-in-out;
+}
+
+.sidebar .footer a:hover {
+    transform: scale(1.05); /* Slightly scale the link on hover */
 }

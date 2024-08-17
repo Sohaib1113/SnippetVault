@@ -9,33 +9,164 @@ body {
 }
 
 .container {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    background-color: #fff;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
     padding: 40px 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: visible; /* Ensure floating elements are visible */
+    background-color: rgba(0, 0, 0, 0.571); /* Semi-transparent background color */
+    background-image: url('21.jpg'); /* Transparent image */
+    background-repeat: no-repeat; /* Prevent image from repeating */
+    background-position: center center; /* Center the image */
+    background-size: cover; /* Ensure the image covers the container */
+    position: absolute; /* Position absolute to cover the entire screen */
+    top: 0; /* Align to top of the screen */
+    left: 0; /* Align to left of the screen */
+    transform: none; /* Remove previous centering transformation */
+    border: none; /* Remove border if not needed */
 }
 
+/* Define the animation for the floating effect */
+@keyframes floatAndBounce {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    25% {
+        transform: translate(50px, -50px) rotate(45deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50px, 50px) rotate(90deg);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translate(30px, 30px) rotate(135deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(0, 0) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* Floating text elements */
+.float-text {
+    position: absolute;
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(0, 41, 58);
+    animation: floatAndBounce 10s ease-in-out infinite;
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.6); /* White glow shadow */
+}
+
+/* Define content and positions for each floating text element */
+.float-text.html {
+    top: 5%;
+    left: 16%;
+    animation-delay: 0s;
+}
+
+.float-text.css {
+    top: 20%;
+    left: 30%;
+    animation-delay: 2s;
+}
+
+.float-text.php {
+    top: 30%;
+    left: 50%;
+    animation-delay: 4s;
+}
+
+.float-text.java {
+    top: 20%;
+    left: 30%;
+    animation-delay: 5s;
+}
+
+.float-text.c {
+    top: 50%;
+    left: 30%;
+    animation-delay: 5s;
+}
+
+.float-text.python {
+    top: 60%;
+    left: 10%;
+    animation-delay: 5s;
+}
+
+.float-text.ai {
+    top: 70%;
+    left: 70%;
+    animation-delay: 4s;
+}
+
+.float-text.variables {
+    top: 20%;
+    left: 40%;
+    animation-delay: 4s;
+}
+
+.float-text.functions {
+    top: 90%;
+    left: 10%;
+    animation-delay: 6s;
+}
+
+.float-text.styles {
+    top: 30%;
+    left: 90%;
+    animation-delay: 4s;
+}
+/* Style for the login box */
 .login-box {
     width: 100%;
     max-width: 400px;
     padding: 30px 20px;
-    background-color: #fff;
+    background: rgb(1,0,26);
+    background: linear-gradient(164deg, rgba(1,0,26,1) 0%, rgba(23,107,223,1) 64%, rgba(255,255,255,1) 100%);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow for a 3D effect */
+    backdrop-filter: blur(20px); /* Stronger blur for glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: light border to enhance glass look */
+    color: white; /* Text color to ensure visibility on glass background */
+    position: relative; /* Position relative to allow footer to be positioned correctly */
+    z-index: 1; /* Ensure login box is above the footer */
+    margin-bottom: 80px; /* Adjust this value as needed to provide space for the footer */
 }
+
+/* Style for the footer */
+.footer {
+    position: absolute; /* Absolute positioning relative to the nearest positioned ancestor (.login-box) */
+    bottom: -180px; /* Position the footer below the .login-box */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust horizontal positioning */
+    text-align: center; /* Center the text inside the footer */
+    font-family: 'Arial', sans-serif;
+    color: #010d2a; /* Text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: transparent; /* Background color for footer */
+    box-shadow: 0 -2px 5px rgba(189, 9, 9, 0.1); /* Optional shadow to separate from content */
+    width: 140%; /* Full width of the parent container */
+    max-width: 900px; /* Maximum width of the footer */
+    text-shadow: 0 0 10px rgba(0, 170, 255, 0.785); /* Dark blue glow effect */
+}
+
+
 
 .login-box h2 {
     text-align: center;
     margin-bottom: 25px;
     font-size: 24px;
-    color: #333;
+    color: #ffffff;
 }
 
 .login-box form {
@@ -56,14 +187,14 @@ body {
     padding: 12px;
     border: none;
     border-radius: 5px;
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: #000b487e;
+    color: #ffffff;
     font-size: 16px;
     cursor: pointer;
 }
 
 .login-box button:hover {
-    background-color: #3e8e41;
+    background-color: #1a0000;
 }
 
 @keyframes floating {
@@ -81,3 +212,5 @@ body {
 .login-box {
     animation: floating 5s ease-in-out infinite;
 }
+
+

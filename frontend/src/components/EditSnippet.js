@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../axiosConfig';
 import './dashboard.css'; // Assuming this contains your original styles
+import { ToastContainer, toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditSnippet = () => {
   const [title, setTitle] = useState('');
@@ -9,6 +13,7 @@ const EditSnippet = () => {
   const [code, setCode] = useState('');
   const [tags, setTags] = useState('');
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -16,6 +21,7 @@ const EditSnippet = () => {
     const fetchSnippet = async () => {
       const token = localStorage.getItem('token');
       try {
+        setLoading(true);
         const res = await axios.get(`/api/snippets/${id}`, {
           headers: {
             'x-auth-token': token,
@@ -27,7 +33,10 @@ const EditSnippet = () => {
         setTags(res.data.tags);
       } catch (err) {
         console.error(err);
+        toast.error('Failed to load snippet data.');
         navigate('/dashboard');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -56,14 +65,37 @@ const EditSnippet = () => {
           'x-auth-token': token,
         },
       });
+      toast.success('Snippet updated successfully!');
       navigate('/dashboard');
     } catch (err) {
       console.error(err);
+      toast.error('Failed to update snippet.');
+    }
+  };
+
+  const handleShare = async () => {
+    const email = prompt("Enter the email to share with (optional):");
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.post(`/api/snippets/${id}/share`, { email }, {
+        headers: {
+          'x-auth-token': token,
+        },
+      });
+      const shareableLink = res.data.shareableLink;
+      navigator.clipboard.writeText(shareableLink);
+      toast.success('Link copied to clipboard!');
+    } catch (err) {
+      toast.error('Failed to generate shareable link.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="g-sidenav-show bg-gray-100">
+      <ToastContainer />
       <div className="sidebar">
         <div className="brand">SnippetVault Dashboard</div>
         <ul className="menu">
@@ -81,6 +113,7 @@ const EditSnippet = () => {
         <div className="container-fluid py-4">
           <div className="universal-card">
             <h2>Edit Snippet</h2>
+            {loading && <div className="loading-spinner"><FontAwesomeIcon icon={faSpinner} spin /> Loading...</div>}
             <form className="create-snippet-form" onSubmit={handleSubmit}>
               <input 
                 type="text" 
@@ -110,6 +143,7 @@ const EditSnippet = () => {
               />
               <button type="submit">Update Snippet</button>
             </form>
+            <button onClick={handleShare}>Share Snippet</button>
           </div>
         </div>
       </main>

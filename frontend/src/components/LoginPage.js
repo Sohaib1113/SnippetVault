@@ -41,7 +41,24 @@ const LoginPage = () => {
           />
           <button type="submit" id="login-btn">Login</button>
         </form>
+        <div class="footer">
+    <div><h4>Developed By: Sohaib Syed</h4></div>
+    <div><a href="https://sohaibsportfolio.netlify.app" class="footer-link"><h4>MyPortfolio</h4></a></div>
+</div>
       </div>
+      {/* Floating text elements */}
+      <div className="float-text html">HTMl</div>
+      <div className="float-text css">CSS</div>
+      <div className="float-text php">PHP</div>
+      <div className="float-text java">Java</div>
+      <div className="float-text c">C</div>
+      <div className="float-text python">Python</div>
+      <div className="float-text ai">AI</div>
+      <div className="float-text variables">Variables</div>
+      <div className="float-text functions">Functions</div>
+      <div className="float-text styles">Styles</div>
+     
+
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
-import './dashboard.css'; // Assuming this contains your original styles
+import './dashboard.css'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { faEdit, faTrash, faShareAlt, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
+
 
 const Dashboard = () => {
   const [snippets, setSnippets] = useState([]);
@@ -14,6 +16,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeTab, setActiveTab] = useState('created'); 
   const snippetsPerPage = 5;
   const navigate = useNavigate();
 
@@ -33,20 +36,24 @@ const Dashboard = () => {
           setTimeout(() => {
             setSnippets(res.data);
             setLoading(false);
-            toast.success('Snippets loaded successfully!');
-          }, 3000); // 3-second delay
+            if (!toast.isActive('snippets-loaded')) {
+              toast.success('Snippets loaded successfully!', { toastId: 'snippets-loaded' });
+            }
+          }, 3000);
         } catch (err) {
           console.error(err);
           setError('Failed to load snippets. Please try again later.');
           setLoading(false);
-          toast.error('Failed to load snippets. Please try again later.');
+          if (!toast.isActive('snippets-error')) {
+            toast.error('Failed to load snippets. Please try again later.', { toastId: 'snippets-error' });
+          }
         }
       }
     };
-
+  
     fetchData();
   }, [navigate]);
-
+    
   const handleLogout = () => {
     localStorage.removeItem('token');
     toast.info('Logged out successfully!');
@@ -71,7 +78,7 @@ const Dashboard = () => {
           setSnippets(snippets.filter(snippet => snippet.id !== id));
           setLoading(false);
           toast.success('Snippet deleted successfully!');
-        }, 3000); // 3-second delay
+        }, 3000); 
       } catch (err) {
         setError('Failed to delete the snippet. Please try again.');
         setLoading(false);
@@ -84,17 +91,50 @@ const Dashboard = () => {
     setSearchQuery(e.target.value.toLowerCase());
   };
 
+  const handleShare = async (id) => {
+    setLoading(true); 
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.post(`/api/snippets/${id}/share`, {}, {
+        headers: {
+          'x-auth-token': token,
+        },
+      });
+      const shareableLink = res.data.shareableLink;
+      navigator.clipboard.writeText(shareableLink);
+      toast.success('Link copied to clipboard!');
+    } catch (err) {
+      toast.error('Failed to generate shareable link.');
+    } finally {
+      setLoading(false); 
+    }
+  };
+
+  const handleFork = async (id) => {
+    setLoading(true); 
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.post(`/api/snippets/${id}/fork`, {}, {
+        headers: {
+          'x-auth-token': token,
+        },
+      });
+      setSnippets([...snippets, res.data]); 
+      toast.success('Snippet forked successfully!');
+    } catch (err) {
+      toast.error('Failed to fork the snippet.');
+    } finally {
+      setLoading(false); 
+    }
+  };
+
+  const createdSnippets = snippets.filter(snippet => !snippet.title.startsWith('Forked:'));
+  const forkedSnippets = snippets.filter(snippet => snippet.title.startsWith('Forked:'));
+
   const indexOfLastSnippet = currentPage * snippetsPerPage;
   const indexOfFirstSnippet = indexOfLastSnippet - snippetsPerPage;
-  const filteredSnippets = snippets.filter(snippet => {
-    const matchesTag = selectedTag ? snippet.tags.includes(selectedTag) : true;
-    const matchesSearch = snippet.title.toLowerCase().includes(searchQuery) || 
-                          snippet.description.toLowerCase().includes(searchQuery) || 
-                          snippet.tags.toLowerCase().includes(searchQuery);
-    return matchesTag && matchesSearch;
-  });
-  const currentSnippets = filteredSnippets.slice(indexOfFirstSnippet, indexOfLastSnippet);
-  const totalPages = Math.ceil(filteredSnippets.length / snippetsPerPage);
+  const currentSnippets = (activeTab === 'created' ? createdSnippets : forkedSnippets).slice(indexOfFirstSnippet, indexOfLastSnippet);
+  const totalPages = Math.ceil((activeTab === 'created' ? createdSnippets : forkedSnippets).length / snippetsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -102,14 +142,22 @@ const Dashboard = () => {
     <div className="g-sidenav-show bg-gray-100">
       <ToastContainer />
       <div className="sidebar">
-        <div className="brand">SnippetVault Dashboard</div>
-        <ul className="menu">
-          <li><a href="/dashboard"><i className="ni ni-tv-2"></i> Dashboard</a></li>
-          <li><a href="/create-snippet"><i className="ni ni-fat-add"></i> Create Snippet</a></li>
-          <li><a href="/settings"><i className="ni ni-settings"></i> Settings</a></li>
-          <li><a href="/profile"><i className="ni ni-single-02"></i> Profile</a></li>
-        </ul>
-      </div>
+    <div className="brand">SnippetVault Dashboard</div>
+    <ul className="menu">
+        <li><a href="/dashboard"><i className="ni ni-tv-2"></i> Dashboard</a></li>
+        <li><a href="/create-snippet"><i className="ni ni-fat-add"></i> Create Snippet</a></li>
+        <li><a href="/settings"><i className="ni ni-settings"></i> Settings</a></li>
+        <li><a href="/profile"><i className="ni ni-single-02"></i> Profile</a></li>
+    </ul>
+    <div className="footer animated-footer">
+        <p>Developed by Syed Sohaib</p>
+        <p><i className="fas fa-envelope"></i> <a href="mailto:amaans113@gmail.com">amaans113@gmail.com</a></p>
+        <p><i className="fas fa-globe"></i> <a href="https://sohaibsportfolio.netlify.app" target="_blank" rel="noopener noreferrer">sohaibsportfolio.netlify.app</a></p>
+        <p><i className="fab fa-github"></i> <a href="https://github.com/Sohaib1113" target="_blank" rel="noopener noreferrer">github.com/Sohaib1113</a></p>
+    </div>
+</div>
+
+
       <main className="main-content position-relative border-radius-lg">
         <div className="navbar">
           <input 
@@ -121,68 +169,90 @@ const Dashboard = () => {
           />
           <button className="logout-btn" onClick={handleLogout}>Logout</button>
         </div>
-        <div className="container-fluid py-4">
-          <div className="universal-card">
-            <h2>Dashboard</h2>
-            {loading && (
-              <div className="loading-spinner">
-                <FontAwesomeIcon icon={faSpinner} spin /> Loading...
-              </div>
-            )}
-            {error && <div className="error-message">{error}</div>}
-            <div className="snippets-container">
-              {currentSnippets.length > 0 ? (
-                currentSnippets.map((snippet) => (
-                  <div key={snippet.id} className="snippet-card">
-                    <h3>{snippet.title}</h3>
-                    <p>{snippet.description}</p>
-                    <code>{snippet.code}</code>
-                    <div className="snippet-tags">
-                      {snippet.tags && snippet.tags.split(',').map((tag, index) => (
-                        <span 
-                          key={index} 
-                          className={`tag ${selectedTag === tag.trim() ? 'selected' : ''}`} 
-                          onClick={() => handleTagClick(tag.trim())}
-                        >
-                          {tag.trim()}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="snippet-actions">
-                      <button 
-                        className="edit-btn" 
-                        onClick={() => {
-                          if (window.confirm("Are you sure you want to edit this snippet?")) {
-                            navigate(`/edit-snippet/${snippet.id}`);
-                          }
-                        }}
+        <div className="universal-card">
+          <div className="tabs">
+            <button 
+              className={`tab-button ${activeTab === 'created' ? 'active' : ''}`} 
+              onClick={() => setActiveTab('created')}
+            >
+              Created Snippets
+            </button>
+            <button 
+              className={`tab-button ${activeTab === 'forked' ? 'active' : ''}`} 
+              onClick={() => setActiveTab('forked')}
+            >
+              Forked Snippets
+            </button>
+          </div>
+
+          {loading && (
+            <div className="loading-spinner">
+              <FontAwesomeIcon icon={faSpinner} spin /> Loading...
+            </div>
+          )}
+          {error && <div className="error-message">{error}</div>}
+
+          <div className="snippets-grid">
+            {currentSnippets.length > 0 ? (
+              currentSnippets.map((snippet) => (
+                <div key={snippet.id} className="snippet-card">
+                  <h3>{snippet.title}</h3>
+                  <p>{snippet.description}</p>
+                  <code>{snippet.code}</code>
+                  <div className="snippet-tags">
+                    {snippet.tags && snippet.tags.split(',').map((tag, index) => (
+                      <span 
+                        key={index} 
+                        className={`tag ${selectedTag === tag.trim() ? 'selected' : ''}`} 
+                        onClick={() => handleTagClick(tag.trim())}
                       >
-                        Edit
-                      </button>
-                      <button 
-                        className="delete-btn" 
-                        onClick={() => handleDelete(snippet.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
+                        {tag.trim()}
+                      </span>
+                    ))}
                   </div>
-                ))
-              ) : (
-                !loading && <p>No snippets available. <a href="/create-snippet">Create one now!</a></p>
-              )}
-            </div>
-            <div className="pagination">
-              {Array.from({ length: totalPages }, (_, index) => (
-                <button 
-                  key={index + 1} 
-                  onClick={() => paginate(index + 1)}
-                  className={currentPage === index + 1 ? 'active' : ''}
-                >
-                  {index + 1}
-                </button>
-              ))}
-            </div>
+                  <div className="snippet-actions">
+  <button 
+    className="edit-btn" 
+    onClick={() => navigate(`/edit-snippet/${snippet.id}`)}
+  >
+    <FontAwesomeIcon icon={faEdit} /> Edit
+  </button>
+  <button 
+    className="delete-btn" 
+    onClick={() => handleDelete(snippet.id)}
+  >
+    <FontAwesomeIcon icon={faTrash} /> Delete
+  </button>
+  <button 
+    className="share-btn" 
+    onClick={() => handleShare(snippet.id)}
+  >
+    <FontAwesomeIcon icon={faShareAlt} /> Share
+  </button>
+  <button 
+    className="fork-btn" 
+    onClick={() => handleFork(snippet.id)}
+  >
+    <FontAwesomeIcon icon={faCodeBranch} /> Fork
+  </button>
+</div>
+
+                </div>
+              ))
+            ) : (
+              !loading && <p>No snippets available. <a href="/create-snippet">Create one now!</a></p>
+            )}
+          </div>
+          <div className="pagination">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button 
+                key={index + 1} 
+                onClick={() => paginate(index + 1)}
+                className={currentPage === index + 1 ? 'active' : ''}
+              >
+                {index + 1}
+              </button>
+            ))}
           </div>
         </div>
       </main>
