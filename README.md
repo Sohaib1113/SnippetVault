@@ -1,6 +1,7 @@
 # SnippetVault
 SnippetVault Dashboard
  <!-- Replace with your logo URL -->
+![image](https://github.com/user-attachments/assets/c9c7d6d0-0ae0-497e-abda-bec6a16317f0)
 
 Overview
 Welcome to SnippetVault, a robust and visually appealing dashboard for managing code snippets. This project leverages modern technologies and advanced CSS to provide an interactive, user-friendly experience. The SnippetVault Dashboard allows users to create, manage, and share their code snippets with ease.
@@ -11,7 +12,7 @@ Dashboard View: A clean, intuitive interface to navigate through different featu
 Sidebar Navigation: Quickly access the dashboard, create new snippets, update settings, or view your profile.
 Floating Animation Effects: Stunning floating animations for sidebar icons and other elements.
  <!-- Replace with your screenshot URL -->
-
+![image](https://github.com/user-attachments/assets/abb2672b-e01f-42a0-b39b-087c5e87177d)
 2. Snippet Management
 Create Snippets: Add new code snippets with a simple, easy-to-use form.
 Edit Snippets: Modify existing snippets directly from the dashboard.
@@ -35,6 +36,8 @@ Particle Effect Animation: Dynamic particle effect resembling code tags floating
 Responsive Design: Fully responsive layout that adapts to different screen sizes.
  <!-- Replace with your screenshot URL -->
 
+
+![image](https://github.com/user-attachments/assets/cf0b9f69-6990-4430-9d61-c37a11b8043a)
 5. Footer Section
 Developer Information: Footer includes the developer's name, email, GitHub profile, and personal website.
 Floating Footer Animation: Subtle floating effect applied to the footer section.
@@ -94,8 +97,6 @@ Email: amaans113@gmail.com
 GitHub: Sohaib1113
 Portfolio: sohaibsportfolio.netlify.app
 
-![image](https://github.com/user-attachments/assets/c9c7d6d0-0ae0-497e-abda-bec6a16317f0)
-![image](https://github.com/user-attachments/assets/abb2672b-e01f-42a0-b39b-087c5e87177d)
-![image](https://github.com/user-attachments/assets/cf0b9f69-6990-4430-9d61-c37a11b8043a)
+
 
 ![image](https://github.com/user-attachments/assets/a9d31314-d8d4-4ece-84eb-4310052c7347)
