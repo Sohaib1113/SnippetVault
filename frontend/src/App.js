@@ -6,6 +6,7 @@ import RegisterPage from './components/RegisterPage';
 import Dashboard from './components/Dashboard';
 import CreateSnippet from './components/CreateSnippet';
 import EditSnippet from './components/EditSnippet';
+import Profile from './components/Profile'; // Make sure the Profile component is correctly imported
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/create-snippet" element={<CreateSnippet />} />
           <Route path="/edit-snippet/:id" element={<EditSnippet />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>

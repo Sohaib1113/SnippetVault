@@ -4,6 +4,8 @@ import axios from '../axiosConfig';
 import './dashboard.css'; // Assuming this contains your original styles
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Dashboard = () => {
   const [snippets, setSnippets] = useState([]);
@@ -31,11 +33,13 @@ const Dashboard = () => {
           setTimeout(() => {
             setSnippets(res.data);
             setLoading(false);
-          }, 1000); // 3-second delay
+            toast.success('Snippets loaded successfully!');
+          }, 3000); // 3-second delay
         } catch (err) {
           console.error(err);
           setError('Failed to load snippets. Please try again later.');
           setLoading(false);
+          toast.error('Failed to load snippets. Please try again later.');
         }
       }
     };
@@ -45,6 +49,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    toast.info('Logged out successfully!');
     navigate('/login');
   };
 
@@ -65,10 +70,12 @@ const Dashboard = () => {
         setTimeout(() => {
           setSnippets(snippets.filter(snippet => snippet.id !== id));
           setLoading(false);
-        }, 1000); // 3-second delay
+          toast.success('Snippet deleted successfully!');
+        }, 3000); // 3-second delay
       } catch (err) {
         setError('Failed to delete the snippet. Please try again.');
         setLoading(false);
+        toast.error('Failed to delete the snippet. Please try again.');
       }
     }
   };
@@ -93,6 +100,7 @@ const Dashboard = () => {
 
   return (
     <div className="g-sidenav-show bg-gray-100">
+      <ToastContainer />
       <div className="sidebar">
         <div className="brand">SnippetVault Dashboard</div>
         <ul className="menu">

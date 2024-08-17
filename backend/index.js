@@ -3,17 +3,22 @@ const cors = require('cors'); // Import CORS
 const sequelize = require('./db');
 const auth = require('./middleware/auth');
 const app = express();
-// Enable CORS for all routes
-app.use(cors());
-app.use(express.json());
 
-// Route imports
+// Import routes
+const profileRoutes = require('./routes/profile');
 const authRoutes = require('./routes/auth');
 const snippetRoutes = require('./routes/snippet');  // We will create this route later
+
+// Enable CORS for all routes
+app.use(cors());
+
+// For parsing application/json
+app.use(express.json());
 
 // Use routes
 app.use('/api/auth', authRoutes);              // For authentication (register, login)
 app.use('/api/snippets', auth, snippetRoutes); // Protect snippet routes with auth middleware
+app.use('/api/profile', auth, profileRoutes);  // Protect profile routes with auth middleware
 
 // Basic route
 app.get('/', (req, res) => {
