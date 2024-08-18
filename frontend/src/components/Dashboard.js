@@ -141,7 +141,7 @@ const Dashboard = () => {
   return (
     <div className="g-sidenav-show bg-gray-100">
       <ToastContainer />
-      <div className="sidebar">
+ <div className="sidebar">
     <div className="brand">SnippetVault Dashboard</div>
     <ul className="menu">
         <li><a href="/dashboard"><i className="ni ni-tv-2"></i> Dashboard</a></li>
@@ -149,12 +149,12 @@ const Dashboard = () => {
         <li><a href="/settings"><i className="ni ni-settings"></i> Settings</a></li>
         <li><a href="/profile"><i className="ni ni-single-02"></i> Profile</a></li>
     </ul>
-    <div className="footer animated-footer">
+    <div className='mycustfooter'>
         <p>Developed by Syed Sohaib</p>
         <p><i className="fas fa-envelope"></i> <a href="mailto:amaans113@gmail.com">amaans113@gmail.com</a></p>
         <p><i className="fas fa-globe"></i> <a href="https://sohaibsportfolio.netlify.app" target="_blank" rel="noopener noreferrer">sohaibsportfolio.netlify.app</a></p>
         <p><i className="fab fa-github"></i> <a href="https://github.com/Sohaib1113" target="_blank" rel="noopener noreferrer">github.com/Sohaib1113</a></p>
-    </div>
+        </div>
 </div>
 
 
@@ -255,6 +255,10 @@ const Dashboard = () => {
             ))}
           </div>
         </div>
+          {/* Footer */}
+    <footer className="animated-footer">
+        <p>&copy; {new Date().getFullYear()} All rights reserved by Syed Sohaib</p>
+    </footer>
       </main>
     </div>
   );

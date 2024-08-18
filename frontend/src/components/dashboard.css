@@ -404,3 +404,84 @@ background: linear-gradient(to right, #C6426E, #642B73); /* W3C, IE 10+/ Edge, F
 .sidebar .footer a:hover {
     transform: scale(1.05); /* Slightly scale the link on hover */
 }
+
+/* FOOTERNEW */
+/* Ensure the body has some margin for the footer alignment */
+
+
+.mycustfooter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the start (left) */
+    padding: 10px 20px; /* Add some padding */
+    background: transparent; /* Transparent background */
+    color: #fff; /* White text color */
+    font-family: Arial, sans-serif; /* Use a sans-serif font for the footer text */
+    font-size: 14px; /* Font size for the text */
+}
+
+.mycustfooter p {
+    margin: 0; /* Remove default margin */
+    padding: 5px 0; /* Add padding for spacing */
+    display: flex; /* Flex container for icon and link alignment */
+    align-items: center; /* Align items vertically centered */
+}
+
+.mycustfooter i {
+    margin-right: 8px; /* Space between icon and text */
+    animation: rotate 2s linear infinite; /* Apply rotation animation */
+}
+
+/* Keyframes for rotation animation */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg); /* Start from 0 degrees */
+    }
+    to {
+        transform: rotate(360deg); /* Rotate to 360 degrees */
+    }
+}
+
+.mycustfooter a {
+    color: #fff; /* White color for the links */
+    text-decoration: none; /* Remove underline from links */
+    transition: color 0.3s ease-in-out; /* Smooth transition for link color */
+}
+
+.mycustfooter a:hover {
+    color: #ccc; /* Change link color on hover */
+}
+/* animated foot */
+/* Footer Styling */
+.animated-footer {
+    width: calc(100% - 320px);  /* Adjusted width to match the navbar */
+    height: 30px;
+    background: #642B73;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #C6426E, #642B73);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #C6426E, #642B73); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the text */
+    padding: 0 20px;
+    position: fixed;
+    bottom: 20px; /* Position at the bottom */
+    left: 276px; /* Adjusted for floating sidebar */
+    border-radius: 10px; /* Rounded corners for a floating effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for a floating effect */
+    z-index: 999; /* Ensure it stays on top */
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    animation: footerFloatIn 1.5s ease-out forwards;
+}
+
+@keyframes footerFloatIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
