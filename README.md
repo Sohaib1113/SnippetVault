@@ -14,7 +14,9 @@ Welcome to **SnippetVault**, a robust and visually appealing dashboard for manag
 - **Sidebar Navigation**: Quickly access the dashboard, create new snippets, update settings, or view your profile.
 - **Floating Animation Effects**: Stunning floating animations for sidebar icons and other elements.
 
-![Dashboard Overview](https://github.com/user-attachments/assets/abb2672b-e01f-42a0-b39b-087c5e87177d)
+![image](https://github.com/user-attachments/assets/82b7d367-cf93-48ca-8f93-46f90629f2fc)
+![image](https://github.com/user-attachments/assets/940645d6-9365-466d-99bb-1fc31fdf0804)
+
 
 ### 2. Snippet Management
 
@@ -26,7 +28,8 @@ Welcome to **SnippetVault**, a robust and visually appealing dashboard for manag
 - **Snippet Cards**: Display snippets in a card layout with tags and actions neatly organized.
 - **Pagination**: Seamless pagination for easy navigation through multiple snippets.
 
-![Snippet Management](https://github.com/user-attachments/assets/abb2672b-e01f-42a0-b39b-087c5e87177d)
+![image](https://github.com/user-attachments/assets/c433df5b-fc37-437d-b148-fe665b2bad88)
+
 
 ### 3. User Authentication
 
