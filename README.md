@@ -26,8 +26,9 @@ Welcome to **SnippetVault**, a robust and visually appealing dashboard for manag
 - **Tag Management**: Assign and filter snippets by tags for better organization.
 - **Snippet Cards**: Display snippets in a card layout with tags and actions neatly organized.
 - **Pagination**: Seamless pagination for easy navigation through multiple snippets.
-
+- **Version & comments**: Seamless versions and comments on snippets.
 ![image](https://github.com/user-attachments/assets/c433df5b-fc37-437d-b148-fe665b2bad88)
+![image](https://github.com/user-attachments/assets/d59714b1-a84a-43df-a3e9-50ec90232b74)
 
 ### 3. User Authentication
 
