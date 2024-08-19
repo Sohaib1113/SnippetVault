@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const Snippet = require('../models/Snippet');
+const Version = require('../models/Version'); // Import Version model
+const Comment = require('../models/Comment'); // Import Comment model
 const { v4: uuidv4 } = require('uuid'); // To generate unique identifiers
 
 // @route   POST /api/snippets
@@ -16,7 +18,7 @@ router.post('/', auth, async (req, res) => {
       description,
       code,
       tags,
-      userId: req.user.id  // Associate snippet with the logged-in user
+      userId: req.user.id,  // Associate snippet with the logged-in user
     });
 
     const snippet = await newSnippet.save();
@@ -65,7 +67,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // @route   PUT /api/snippets/:id
-// @desc    Update a snippet by ID
+// @desc    Update a snippet by ID and create a new version
 // @access  Private
 router.put('/:id', auth, async (req, res) => {
   const { title, description, code, tags } = req.body;
@@ -77,6 +79,14 @@ router.put('/:id', auth, async (req, res) => {
       return res.status(404).json({ msg: 'Snippet not found' });
     }
 
+    // Create a new version before updating the snippet
+    const newVersion = new Version({
+      content: snippet.code,
+      snippetId: snippet.id,
+    });
+    await newVersion.save();
+
+    // Update the snippet with new data
     snippet.title = title || snippet.title;
     snippet.description = description || snippet.description;
     snippet.code = code || snippet.code;
@@ -180,6 +190,86 @@ router.post('/:id/fork', auth, async (req, res) => {
 
     await forkedSnippet.save();
     res.json(forkedSnippet);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// Get version history of a snippet
+router.get('/:snippetId/versions', auth, async (req, res) => {
+  try {
+    const versions = await Version.findAll({
+      where: { snippetId: req.params.snippetId },
+      order: [['createdAt', 'ASC']],
+    });
+
+    if (versions.length === 0) {
+      return res.status(200).json([]); // No versions found, return an empty array
+    }
+
+    res.json(versions);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// Get a specific version of a snippet
+router.get('/:snippetId/version/:versionId', auth, async (req, res) => {
+  try {
+    const version = await Version.findOne({
+      where: {
+        snippetId: req.params.snippetId,
+        versionId: req.params.versionId,
+      },
+    });
+
+    if (!version) {
+      return res.status(404).json({ msg: 'Version not found' });
+    }
+
+    res.json(version);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// Get comments for a snippet
+router.get('/:snippetId/comments', auth, async (req, res) => {
+  try {
+    const comments = await Comment.findAll({
+      where: { snippetId: req.params.snippetId },
+      order: [['createdAt', 'ASC']],
+    });
+
+    if (comments.length === 0) {
+      return res.status(200).json([]); // No comments found, return an empty array
+    }
+
+    res.json(comments);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// Add a new comment to a snippet
+router.post('/:snippetId/comments', auth, async (req, res) => {
+  const { content } = req.body;
+  if (!content) {
+    return res.status(400).json({ msg: 'Content is required' });
+  }
+
+  try {
+    const newComment = new Comment({
+      content,
+      snippetId: req.params.snippetId,
+    });
+
+    await newComment.save();
+    res.status(201).json(newComment);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

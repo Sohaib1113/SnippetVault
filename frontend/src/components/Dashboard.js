@@ -8,6 +8,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { faEdit, faTrash, faShareAlt, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
 
+import SnippetVersionHistory from './SnippetVersionHistory'; // New Component
+import SnippetCommenting from './SnippetCommenting'; // New Component
+import SnippetCollection from './SnippetCollection'; // New Component
+import SnippetSearchAndFilter from './SnippetSearchAndFilter'; // New Component
 
 const Dashboard = () => {
   const [snippets, setSnippets] = useState([]);
@@ -141,22 +145,22 @@ const Dashboard = () => {
   return (
     <div className="g-sidenav-show bg-gray-100">
       <ToastContainer />
- <div className="sidebar">
-    <div className="brand">SnippetVault Dashboard</div>
-    <ul className="menu">
-        <li><a href="/dashboard"><i className="ni ni-tv-2"></i> Dashboard</a></li>
-        <li><a href="/create-snippet"><i className="ni ni-fat-add"></i> Create Snippet</a></li>
-        <li><a href="/settings"><i className="ni ni-settings"></i> Settings</a></li>
-        <li><a href="/profile"><i className="ni ni-single-02"></i> Profile</a></li>
-    </ul>
-    <div className='mycustfooter'>
-        <p>Developed by Syed Sohaib</p>
-        <p><i className="fas fa-envelope"></i> <a href="mailto:amaans113@gmail.com">amaans113@gmail.com</a></p>
-        <p><i className="fas fa-globe"></i> <a href="https://sohaibsportfolio.netlify.app" target="_blank" rel="noopener noreferrer">sohaibsportfolio.netlify.app</a></p>
-        <p><i className="fab fa-github"></i> <a href="https://github.com/Sohaib1113" target="_blank" rel="noopener noreferrer">github.com/Sohaib1113</a></p>
+      <div className="sidebar">
+        <div className="brand">SnippetVault Dashboard</div>
+        <ul className="menu">
+          <li><a href="/dashboard"><i className="ni ni-tv-2"></i> Dashboard</a></li>
+          <li><a href="/create-snippet"><i className="ni ni-fat-add"></i> Create Snippet</a></li>
+          <li><a href="/collections"><i className="ni ni-bullet-list-67"></i> Collections</a></li>
+          <li><a href="/settings"><i className="ni ni-settings"></i> Settings</a></li>
+          <li><a href="/profile"><i className="ni ni-single-02"></i> Profile</a></li>
+        </ul>
+        <div className='mycustfooter'>
+          <p>Developed by Syed Sohaib</p>
+          <p><i className="fas fa-envelope"></i> <a href="mailto:amaans113@gmail.com">amaans113@gmail.com</a></p>
+          <p><i className="fas fa-globe"></i> <a href="https://sohaibsportfolio.netlify.app" target="_blank" rel="noopener noreferrer">sohaibsportfolio.netlify.app</a></p>
+          <p><i className="fab fa-github"></i> <a href="https://github.com/Sohaib1113" target="_blank" rel="noopener noreferrer">github.com/Sohaib1113</a></p>
         </div>
-</div>
-
+      </div>
 
       <main className="main-content position-relative border-radius-lg">
         <div className="navbar">
@@ -169,6 +173,15 @@ const Dashboard = () => {
           />
           <button className="logout-btn" onClick={handleLogout}>Logout</button>
         </div>
+
+        <SnippetSearchAndFilter 
+          searchQuery={searchQuery} 
+          setSearchQuery={setSearchQuery} 
+          selectedTag={selectedTag}
+          handleTagClick={handleTagClick}
+          setSelectedTag={setSelectedTag}
+        />
+
         <div className="universal-card">
           <div className="tabs">
             <button 
@@ -211,32 +224,34 @@ const Dashboard = () => {
                     ))}
                   </div>
                   <div className="snippet-actions">
-  <button 
-    className="edit-btn" 
-    onClick={() => navigate(`/edit-snippet/${snippet.id}`)}
-  >
-    <FontAwesomeIcon icon={faEdit} /> Edit
-  </button>
-  <button 
-    className="delete-btn" 
-    onClick={() => handleDelete(snippet.id)}
-  >
-    <FontAwesomeIcon icon={faTrash} /> Delete
-  </button>
-  <button 
-    className="share-btn" 
-    onClick={() => handleShare(snippet.id)}
-  >
-    <FontAwesomeIcon icon={faShareAlt} /> Share
-  </button>
-  <button 
-    className="fork-btn" 
-    onClick={() => handleFork(snippet.id)}
-  >
-    <FontAwesomeIcon icon={faCodeBranch} /> Fork
-  </button>
-</div>
+                    <button 
+                      className="edit-btn" 
+                      onClick={() => navigate(`/edit-snippet/${snippet.id}`)}
+                    >
+                      <FontAwesomeIcon icon={faEdit} /> Edit
+                    </button>
+                    <button 
+                      className="delete-btn" 
+                      onClick={() => handleDelete(snippet.id)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} /> Delete
+                    </button>
+                    <button 
+                      className="share-btn" 
+                      onClick={() => handleShare(snippet.id)}
+                    >
+                      <FontAwesomeIcon icon={faShareAlt} /> Share
+                    </button>
+                    <button 
+                      className="fork-btn" 
+                      onClick={() => handleFork(snippet.id)}
+                    >
+                      <FontAwesomeIcon icon={faCodeBranch} /> Fork
+                    </button>
+                  </div>
 
+                  <SnippetVersionHistory snippetId={snippet.id} />
+                  <SnippetCommenting snippetId={snippet.id} />
                 </div>
               ))
             ) : (
@@ -255,10 +270,10 @@ const Dashboard = () => {
             ))}
           </div>
         </div>
-          {/* Footer */}
-    <footer className="animated-footer">
-        <p>&copy; {new Date().getFullYear()} All rights reserved by Syed Sohaib</p>
-    </footer>
+        {/* Footer */}
+        <footer className="animated-footer">
+          <p>&copy; {new Date().getFullYear()} All rights reserved by Syed Sohaib</p>
+        </footer>
       </main>
     </div>
   );

@@ -6,7 +6,9 @@ import RegisterPage from './components/RegisterPage';
 import Dashboard from './components/Dashboard';
 import CreateSnippet from './components/CreateSnippet';
 import EditSnippet from './components/EditSnippet';
-import Profile from './components/Profile'; // Make sure the Profile component is correctly imported
+import Profile from './components/Profile';
+import CollectionList from './components/CollectionList';
+import CollectionDetail from './components/CollectionDetail'; // Ensure this import path is correct
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/create-snippet" element={<CreateSnippet />} />
           <Route path="/edit-snippet/:id" element={<EditSnippet />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/collections" element={<CollectionList />} />
+          <Route path="/collections/:collectionId" element={<CollectionDetail />} />
         </Routes>
       </div>
     </Router>

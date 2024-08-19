@@ -485,3 +485,116 @@ background: linear-gradient(to right, #C6426E, #642B73); /* W3C, IE 10+/ Edge, F
         transform: translateY(0);
     }
 }
+/* newfiles added collcommnetsearch filter history  */
+/* Updated styles for new features */
+.version-history, .comment-section, .collection-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .version-history ul, .comment-section ul, .collection-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .version-history li, .comment-section li, .collection-section li {
+    margin-bottom: 10px;
+  }
+  
+  .search-filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-filter-container input {
+    width: 60%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .filter-tags button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .filter-tags button.selected {
+    background-color: #2980b9;
+  }
+  
+  .filter-tags button:hover {
+    background-color: #2980b9;
+  }
+  /* collectgions */
+  .collection-list {
+    padding: 20px;
+  }
+  
+  .dashboard-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .collections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .collection-card {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .collection-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+  
+
+  /* create collectionform */
+  .collection-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .collection-form input {
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .collection-form button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5e72e4;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .collection-form button:hover {
+    background-color: #324cdd;
+  }
+  
