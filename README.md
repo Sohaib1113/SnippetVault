@@ -52,6 +52,8 @@ Welcome to **SnippetVault**, a robust and visually appealing dashboard for manag
 - **Add Snippets to Collections**: Easily assign snippets to collections for better organization.
 - **View Collections**: Display all collections and their associated snippets.
 - **Responsive Design**: Ensure consistent design and responsiveness across all collection views.
+![image](https://github.com/user-attachments/assets/e8d32b59-93cc-4faf-a8a6-1550e705f060)
+
 
 ### 6. Footer Section
 
