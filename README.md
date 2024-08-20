@@ -1,4 +1,5 @@
 # SnippetVault
+![image](https://github.com/user-attachments/assets/431c6ce9-6c5b-4b6b-9d51-291522fda559)
 
 ![SnippetVault Logo](https://github.com/user-attachments/assets/c9c7d6d0-0ae0-497e-abda-bec6a16317f0)
 
