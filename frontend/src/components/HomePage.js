@@ -48,6 +48,22 @@ const HomePage = () => {
       <div className="homepage-links">
         <Link className="homepage-link" to="/login">Login</Link> | <Link className="homepage-link" to="/register">Register</Link>
       </div>
+      
+      {/* Info Cards Section */}
+      <div className="info-cards-container">
+        <div className="info-card">
+          <h2 className="info-card-title">Manage Snippets</h2>
+          <p className="info-card-content">Organize your code snippets efficiently and access them anytime, anywhere.</p>
+        </div>
+        <div className="info-card">
+          <h2 className="info-card-title">Share with Teams</h2>
+          <p className="info-card-content">Easily share code snippets with your team and collaborate on projects.</p>
+        </div>
+        <div className="info-card">
+          <h2 className="info-card-title">Fork and Edit</h2>
+          <p className="info-card-content">Fork existing snippets, make edits, and create your own versions.</p>
+        </div>
+      </div>
     </div>
   );
 };

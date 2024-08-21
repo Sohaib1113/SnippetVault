@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
-import './LoginPage.css'; // Import the CSS file
+import './RegisterPage.css';
+
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');

@@ -4,8 +4,14 @@ html, body {
   padding: 0;
   box-sizing: border-box;
 }
-.homepage-container 
-{
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.homepage-container {
   width: 1300px;
   height: 100vh;
   display: flex;
@@ -19,11 +25,6 @@ html, body {
   position: relative;
   animation: backgroundAnimation 20s infinite linear;
 }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 /* Title */
 .homepage-title {
@@ -36,6 +37,9 @@ html, body {
 /* Links */
 .homepage-links {
   font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .homepage-link {
@@ -43,20 +47,45 @@ html, body {
   text-decoration: none;
   font-weight: bold;
   margin: 0 0.5rem;
-  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+  z-index: 3; /* Keep above floating snippets */
 }
 
 .homepage-link:hover {
   color: #d4d4d8; /* Lighten color on hover */
+  transform: scale(1.1);
 }
 
-/* Floating code snippets */
-.floating-snippets {
+/* Highlight animation for the links */
+.homepage-link::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  transform: scale(1.2);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.homepage-link:hover::before {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Floating code snippets */
+.floating-snippets {
+  position: absolute;
+  top: 20%; /* Start from the middle */
+  left: 0;
+  width: 100%;
+  height: 80%; /* Extend the height to cover more area */
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
@@ -69,6 +98,40 @@ html, body {
   font-family: 'Courier New', Courier, monospace;
   white-space: nowrap;
   animation: floatSnippet 20s infinite linear;
+}
+
+/* Information cards */
+.info-cards-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  z-index: 2; /* Ensure cards are above floating snippets */
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem; /* Reduced padding */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+  width: 150px; /* Reduced width */
+  text-align: left;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.info-card-title {
+  font-size: 1rem; /* Reduced font size */
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.info-card-content {
+  font-size: 0.875rem; /* Reduced font size */
+  line-height: 1.4;
 }
 
 /* Keyframes for animations */
@@ -84,11 +147,11 @@ html, body {
 
 @keyframes floatSnippet {
   from {
-      transform: translateY(100%);
+      transform: translateY(100%); /* Start from below the visible area */
       opacity: 0;
   }
   to {
-      transform: translateY(-100%);
+      transform: translateY(-150%); /* Move all the way to the top and disappear */
       opacity: 1;
   }
 }
