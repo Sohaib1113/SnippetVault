@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './homepage.css';  // Import the updated CSS for HomePage
+import FeatureCard from './FeatureCard';  // Import the FeatureCard component
+import { faCode, faUsers, faShareAlt } from '@fortawesome/free-solid-svg-icons';  // Import FontAwesome icons
 
 const HomePage = () => {
   useEffect(() => {
@@ -49,20 +51,23 @@ const HomePage = () => {
         <Link className="homepage-link" to="/login">Login</Link> | <Link className="homepage-link" to="/register">Register</Link>
       </div>
       
-      {/* Info Cards Section */}
+      {/* Reusable Feature Cards Section */}
       <div className="info-cards-container">
-        <div className="info-card">
-          <h2 className="info-card-title">Manage Snippets</h2>
-          <p className="info-card-content">Organize your code snippets efficiently and access them anytime, anywhere.</p>
-        </div>
-        <div className="info-card">
-          <h2 className="info-card-title">Share with Teams</h2>
-          <p className="info-card-content">Easily share code snippets with your team and collaborate on projects.</p>
-        </div>
-        <div className="info-card">
-          <h2 className="info-card-title">Fork and Edit</h2>
-          <p className="info-card-content">Fork existing snippets, make edits, and create your own versions.</p>
-        </div>
+        <FeatureCard 
+          icon={faCode} 
+          title="Manage Snippets" 
+          description="Organize your code snippets efficiently and access them anytime, anywhere." 
+        />
+        <FeatureCard 
+          icon={faUsers} 
+          title="Share with Teams" 
+          description="Easily share code snippets with your team and collaborate on projects." 
+        />
+        <FeatureCard 
+          icon={faShareAlt} 
+          title="Fork and Edit" 
+          description="Fork existing snippets, make edits, and create your own versions." 
+        />
       </div>
     </div>
   );
