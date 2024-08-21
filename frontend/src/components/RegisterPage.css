@@ -1,5 +1,5 @@
-/* Background styling to match the login page */
-body {
+/* Background styling for the register page */
+.register-page {
     background: linear-gradient(to bottom right, #1e3a8a, #6d28d9);
     height: 100vh;
     display: flex;
@@ -7,60 +7,58 @@ body {
     align-items: center;
     margin: 0;
     font-family: 'Arial', sans-serif;
+    width: 300vh;
   }
+  
   /* Glassmorphism container styling */
-.auth-container {
+  .register-page .auth-container {
     width: 400px;
     margin: 50px auto;
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.1); /* Light transparent background */
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     text-align: center;
     color: white;
-    backdrop-filter: blur(10px); /* Glassmorphism effect */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Border for more glass effect */
-    
-    /* Enhanced box-shadow with a glowing effect */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 
-      0 4px 8px rgba(0, 0, 0, 0.2), /* Base shadow */
-      0 0 15px rgba(255, 255, 255, 0.5), /* Glowing white shadow */
-      0 0 30px rgba(255, 255, 255, 0.3), /* Larger white glow */
-      0 0 45px rgba(255, 255, 255, 0.1); /* Subtle outer glow */
-    
-    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for any changes */
+      0 4px 8px rgba(0, 0, 0, 0.2),
+      0 0 15px rgba(255, 255, 255, 0.5),
+      0 0 30px rgba(255, 255, 255, 0.3),
+      0 0 45px rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
   }
   
   /* Hover effect to enhance glow */
-  .auth-container:hover {
+  .register-page .auth-container:hover {
     box-shadow: 
-      0 4px 8px rgba(0, 0, 0, 0.2), /* Base shadow */
-      0 0 20px rgba(255, 255, 255, 0.6), /* Enhanced glowing white shadow */
-      0 0 40px rgba(255, 255, 255, 0.4), /* Larger white glow */
-      0 0 60px rgba(255, 255, 255, 0.2); /* Stronger outer glow */
+      0 4px 8px rgba(0, 0, 0, 0.2),
+      0 0 20px rgba(255, 255, 255, 0.6),
+      0 0 40px rgba(255, 255, 255, 0.4),
+      0 0 60px rgba(255, 255, 255, 0.2);
   }
   
-  
   /* Form title */
-  .auth-container h2 {
+  .register-page .auth-container h2 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Text glow effect */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
   
   /* Form group styles */
-  .form-group {
+  .register-page .form-group {
     margin-bottom: 1.5rem;
     text-align: left;
   }
   
-  .form-group label {
+  .register-page .form-group label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
   }
   
-  .form-group input {
+  .register-page .form-group input {
     width: 100%;
     padding: 0.75rem;
     border-radius: 10px;
@@ -73,18 +71,18 @@ body {
     transition: background 0.3s ease, transform 0.3s ease;
   }
   
-  .form-group input:focus {
+  .register-page .form-group input:focus {
     background: rgba(255, 255, 255, 0.3);
     transform: scale(1.02);
   }
   
   /* Submit button */
-  button[type="submit"] {
+  .register-page button[type="submit"] {
     width: 100%;
     padding: 0.75rem;
     border: none;
     border-radius: 10px;
-    background: rgba(109, 40, 217, 0.8); /* Slightly transparent for glassmorphism */
+    background: rgba(109, 40, 217, 0.8);
     color: white;
     font-size: 1.2rem;
     font-weight: bold;
@@ -93,22 +91,22 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
-  button[type="submit"]:hover {
+  .register-page button[type="submit"]:hover {
     background: rgba(91, 33, 182, 0.9);
     transform: scale(1.05);
   }
   
   /* Link to login */
-  .auth-container a {
+  .register-page .auth-container a {
     display: block;
     margin-top: 1.5rem;
-    color: rgba(212, 212, 216, 0.9); /* Slightly lighter color */
+    color: rgba(212, 212, 216, 0.9);
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
   }
   
-  .auth-container a:hover {
+  .register-page .auth-container a:hover {
     color: rgba(255, 255, 255, 1);
   }
   
