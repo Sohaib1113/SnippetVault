@@ -597,4 +597,86 @@ background: linear-gradient(to right, #C6426E, #642B73); /* W3C, IE 10+/ Edge, F
   .collection-form button:hover {
     background-color: #324cdd;
   }
-  
+  /* settings */
+  .settings-container {
+    width: calc(100% - 320px);
+    background-color: #ffffff;
+    padding: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 90px; /* Start below the navbar */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 998;
+}
+
+.settings-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.settings-section {
+    margin-bottom: 30px;
+}
+
+.settings-section h3 {
+    font-size: 20px;
+    color: #642B73;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 16px;
+    color: #34495e;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="checkbox"],
+.form-group select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-left: 10px;
+}
+
+.form-group button {
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.form-group button:hover {
+    background-color: #2980b9;
+}
+
+.delete-account-btn {
+    background-color: #e74c3c;
+}
+
+.delete-account-btn:hover {
+    background-color: #c0392b;
+}

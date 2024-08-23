@@ -9,7 +9,7 @@ import EditSnippet from './components/EditSnippet';
 import Profile from './components/Profile';
 import CollectionList from './components/CollectionList';
 import CollectionDetail from './components/CollectionDetail'; // Ensure this import path is correct
-
+import Settings from './components/Settings';
 function App() {
   return (
     <Router>
@@ -24,6 +24,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/collections" element={<CollectionList />} />
           <Route path="/collections/:collectionId" element={<CollectionDetail />} />
+          <Route path="/settings" element={<Settings />} /> {/* Add this line */}
         </Routes>
       </div>
     </Router>

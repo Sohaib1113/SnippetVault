@@ -22,6 +22,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/snippets', auth, snippetRoutes);
 app.use('/api/profile', auth, profileRoutes);
+app.use('/api/settings', require('./routes/settings'));
 
 // Basic route
 app.get('/', (req, res) => {
