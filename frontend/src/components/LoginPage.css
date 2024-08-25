@@ -214,3 +214,51 @@ body {
 }
 
 
+/* register button */
+/* Add this to your LoginPage.css file */
+
+.register-btn {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff; /* Adjust the color as needed */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .register-btn:hover {
+    background-color: #0056b3; /* Adjust the hover color as needed */
+  }
+  /*Home button  */
+  /* Add this to your LoginPage.css file */
+  .home-btn {
+    display: block;
+    margin: 0px auto 10px auto; /* Centers the button and adds spacing */
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 50%; /* This will make the button take the full width of its container */
+    max-width: 300px; /* Set a max-width to keep the button from becoming too wide */
+    background: rgba(255, 255, 255, 0.1); /* Transparent white background */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Slightly visible border */
+    backdrop-filter: blur(10px); /* Creates the glass blur effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: inset 1px 1px 10px rgba(0, 0, 0, 0.2), /* Engraved effect */
+                inset -4px -4px 10px rgba(255, 255, 255, 0.2); /* Engraved effect */
+}
+
+.home-btn:hover {
+    background: rgba(255, 255, 255, 0.15); /* Slightly more opaque transparent white on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    box-shadow: inset 6px 6px 12px rgba(0, 0, 0, 0.25), /* Enhanced engraved effect on hover */
+                inset -6px -6px 12px rgba(0, 0, 0, 0.25); /* Enhanced engraved effect on hover */
+}
+
+  

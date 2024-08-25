@@ -22,7 +22,12 @@ const LoginPage = () => {
 
   return (
     <div className="container">
+       
       <div className="login-box">
+      <button className="home-btn" onClick={() => navigate('/')}>
+        Snippet Vault
+      </button>
+        
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
           <input
@@ -40,6 +45,9 @@ const LoginPage = () => {
             required
           />
           <button type="submit" id="login-btn">Login</button>
+          <button className="register-btn" onClick={() => navigate('/register')}>
+          Not registered? Sign up here
+        </button>
         </form>
         <div class="footer">
     <div><h4>Developed By: Sohaib Syed</h4></div>
