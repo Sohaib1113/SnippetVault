@@ -120,7 +120,7 @@ Contact
 Developed by Syed Sohaib
 
 Email: amaans113@gmail.com
-GitHub: Sohaib1113
+GitHub: github.com/Sohaib1113
 Portfolio: sohaibsportfolio.netlify.app
 
 
